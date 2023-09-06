@@ -33,7 +33,7 @@ public class Usuario {
     @Column(name = "nomeUsuario", length = 30)
     private String nomeUsuario;
 
-    @Column(name = "TelefoneUsuario",length = 12)
-    private String TelefoneUsuario;
+    @Column(name = "telefoneUsuario",length = 12)
+    private String telefoneUsuario;
 
 }
