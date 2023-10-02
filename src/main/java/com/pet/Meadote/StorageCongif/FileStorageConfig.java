@@ -13,13 +13,13 @@ import java.nio.file.Paths;
 @Configuration
 public class FileStorageConfig {
 
-    private final String uploadDir = "D:/TCC/Meadote/ImgPost/"; // Substitua pelo diretório desejado
+    private final String uploadDir = "D:/TCC/Meadote/ImgPost/";
 
     public void saveImage(String imageName, MultipartFile imageFile) {
         try {
             File directory = new File(uploadDir);
             if (!directory.exists()) {
-                directory.mkdirs(); // Crie o diretório se ele não existir
+                directory.mkdirs(); //
             }
 
             File file = new File(directory, imageName);
