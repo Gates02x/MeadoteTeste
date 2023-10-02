@@ -14,5 +14,8 @@ private final UsuarioRepository usuarioRepository;
 public  Usuario CriarConta (Usuario usuario) {
     return usuarioRepository.save(usuario);
 }
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
 
 }

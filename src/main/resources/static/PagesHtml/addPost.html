@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar Post</title>
+</head>
+<body>
+<h1>Adicionar Post</h1>
+<form id="postForm" enctype="multipart/form-data">
+    <label for="comment">Comentário:</label>
+    <input type="text" id="comment" name="comment">
+    <br>
+    <label for="petName">Nome do Pet:</label>
+    <input type="text" id="petName" name="petName">
+    <br>
+    <label for="userId">ID do Usuário:</label>
+    <input type="text" id="userId" name="userId">
+    <br>
+    <label for="image">Imagem:</label>
+    <input type="file" id="image" name="image">
+    <br>
+    <input type="submit" value="Adicionar Post">
+</form>
+
+<table id="postTable">
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    // eventos do formulário
+    document.getElementById("postForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Impede o envio padrão do formulário
+
+        var formData = new FormData(this); // Obtém os dados do formulário
+
+
+        // requisição AJAX para enviar os dados do formulário
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/publicacoes/CriarPost", true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Lide com a resposta do servidor (opcional)
+                console.log("Post adicionado com sucesso");
+
+                // Redirecione o usuário para a página de consulta
+                window.location.href = "/publicacoes/all"; // Redireciona para a página de petPosts
+            } else {
+                console.error("Erro ao adicionar petPost");
+            }
+        };
+        xhr.send(formData);
+    });
+</script>
+</body>
+</html>

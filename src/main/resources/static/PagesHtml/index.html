@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Consulta de Posts</title>
+</head>
+<body>
+<h1>Consulta de Posts</h1>
+
+<div id="postList"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/publicacoes/all',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                var postList = $("#postList");
+
+                data.forEach(function (post) {
+                    var postItem = $("<div>");
+                    postItem.append("<strong>Nome do Pet:</strong> " + post.nomePet + "<br>");
+                    postItem.append("<strong>Comentário:</strong> " + post.comentario + "<br>");
+
+                    // Exibir a imagem usando rota
+                    var imagePath = '/publicacoes/images/' + post.imageName;
+                    postItem.append('<img src="' + imagePath + '" alt="Imagem do Pet"><br>');
+
+                    postList.append(postItem);
+                });
+            },
+            error: function (error) {
+                alert('Erro ao carregar os posts.');
+                console.error(error);
+            }
+        });
+    });
+</script>
+</body>
+</html>

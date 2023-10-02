@@ -22,4 +22,6 @@ public class UsuarioController {
         Usuario contaCriada = usuarioService.CriarConta(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body("feito com sucesso !!!!");
     }
+
+
 }
