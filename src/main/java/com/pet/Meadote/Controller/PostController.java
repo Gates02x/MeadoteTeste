@@ -25,7 +25,7 @@ public class PostController {
     private final FileStorageConfig fileStorageConfig;
 
 
-    @PostMapping(value = "/CriarPost",produces = "application/json")
+    @PostMapping(value = "/CriarPost",produces = "application/json",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createPost(
             @RequestParam("petName") String petName,
             @RequestParam("comment") String comment,
@@ -50,4 +50,5 @@ public class PostController {
         List<PetPost> allPosts = postRepository.findAll();
         return ResponseEntity.ok(allPosts);
     }
+
 }

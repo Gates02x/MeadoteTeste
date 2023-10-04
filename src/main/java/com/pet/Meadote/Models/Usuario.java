@@ -25,10 +25,8 @@ public class Usuario {
     @Column(name = "email", length = 15)
     private String email;
 
-
     @Column (name = "senhaUsuario")
     private String senhaUsuario;
-
 
     @Column(name = "nomeUsuario", length = 30)
     private String nomeUsuario;

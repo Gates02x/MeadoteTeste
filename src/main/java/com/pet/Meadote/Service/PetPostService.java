@@ -1,5 +1,8 @@
 package com.pet.Meadote.Service;
 
+import com.pet.Meadote.DTO.PetPostDTO;
+import com.pet.Meadote.DTO.UsuarioDTO;
+import com.pet.Meadote.Mapper.PetPostMapper;
 import com.pet.Meadote.Models.PetPost;
 import com.pet.Meadote.Models.Usuario;
 import com.pet.Meadote.Repository.PostRepository;
@@ -23,6 +26,8 @@ public class PetPostService {
 
     private final UsuarioRepository usuarioRepository;
 
+    private final PetPostMapper petPostMapper;
+
 
     public ResponseEntity<?> createPost(String petName, String comment, MultipartFile imageFile, Long userId) {
         Optional<Usuario> userOptional = usuarioRepository.findById(userId);
@@ -45,6 +50,8 @@ public class PetPostService {
 
         fileStorageConfig.saveImage(imageName, imageFile);
 
-        return ResponseEntity.ok(savedPost);
+        PetPostDTO petPostDTO = petPostMapper.toDTOPost(savedPost);
+
+        return ResponseEntity.ok(petPostDTO);
     }
 }
