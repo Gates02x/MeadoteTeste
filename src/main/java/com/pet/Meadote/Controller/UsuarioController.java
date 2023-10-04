@@ -1,14 +1,12 @@
 package com.pet.Meadote.Controller;
 
+import com.pet.Meadote.DTO.UsuarioDTO;
 import com.pet.Meadote.Models.Usuario;
 import com.pet.Meadote.Service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -23,5 +21,10 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body("feito com sucesso !!!!");
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
+        UsuarioDTO usuarioDTO = usuarioService.findByIdDto(id);
+        return ResponseEntity.ok(usuarioDTO);
+    }
 
 }
