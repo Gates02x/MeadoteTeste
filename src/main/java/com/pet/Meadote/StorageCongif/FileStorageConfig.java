@@ -29,8 +29,6 @@ public class FileStorageConfig {
         }
     }
 
-
-
     public UrlResource loadImageAsResource(String imageName) throws MalformedURLException {
         Path imagePath = Paths.get(uploadDir).resolve(imageName).normalize();
         UrlResource resource = new UrlResource(imagePath.toUri());
