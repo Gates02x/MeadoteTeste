@@ -2,7 +2,6 @@ package com.pet.Meadote.Controller;
 
 import com.pet.Meadote.DTO.PetPostDTO;
 import com.pet.Meadote.Mapper.PetPostMapper;
-import com.pet.Meadote.Models.PetPost;
 import com.pet.Meadote.Repository.PostRepository;
 import com.pet.Meadote.Service.PetPostService;
 import com.pet.Meadote.StorageCongif.FileStorageConfig;
@@ -20,7 +19,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/publicacoes")
+@RequestMapping("/publi")
 public class PostController {
 
     private final PetPostService petPostService;
@@ -30,7 +29,7 @@ public class PostController {
     private final PetPostMapper petPostMapper;
 
 
-    @PostMapping(value = "/CriarPost",produces = "application/json",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/CreatePost",produces = "application/json",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> createPost(
             @RequestParam("petName") String petName,
             @RequestParam("comment") String comment,
@@ -56,5 +55,10 @@ public class PostController {
                 .map(petPostMapper::toDTOPost)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(allPostDTOs);
+    }
+
+    @GetMapping(value = "/userPosts/{userId}", produces = "application/json")
+    public ResponseEntity<List<PetPostDTO>> getPostsByUserId(@PathVariable Long userId) {
+        return petPostService.getPostsByUserId(userId);
     }
 }

@@ -14,7 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -53,5 +55,15 @@ public class PetPostService {
         PetPostDTO petPostDTO = petPostMapper.toDTOPost(savedPost);
 
         return ResponseEntity.ok(petPostDTO);
+    }
+
+    public ResponseEntity<List<PetPostDTO>> getPostsByUserId(Long userId) {
+        List<PetPost> userPosts = postRepository.findByUsuarioIdUsuario(userId);
+
+        List<PetPostDTO> userPostDTOs = userPosts.stream()
+                .map(petPostMapper::toDTOPost)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(userPostDTOs);
     }
 }

@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/conta")
+@RequestMapping("/account")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @PostMapping(value = "/criar", produces = "application/json")
+    @PostMapping(value = "/create", produces = "application/json")
     public ResponseEntity criarConta (@RequestBody Usuario usuario){
         Usuario contaCriada = usuarioService.CriarConta(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body("feito com sucesso !!!!");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
         UsuarioDTO usuarioDTO = usuarioService.findByIdDto(id);
         return ResponseEntity.ok(usuarioDTO);
     }
-
 }

@@ -1,6 +1,5 @@
 package com.pet.Meadote.Models;
 
-import com.pet.Meadote.DTO.UsuarioDTO;
 import lombok.*;
 
 import javax.persistence.*;
