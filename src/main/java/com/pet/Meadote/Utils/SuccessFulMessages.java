@@ -1,6 +1,7 @@
 package com.pet.Meadote.Utils;
 
-import com.pet.Meadote.Exceptions.ResponseMessagesError;
+import com.pet.Meadote.DTO.UsuarioDTO;
+import com.pet.Meadote.Exceptions.UsuarioNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,8 +11,7 @@ public class SuccessFulMessages {
 
     private String message;
 
-    public static ResponseMessagesError SuccesFullCreatedUser ( String usuario) {
-        return new ResponseMessagesError
-                ("Usuario "+usuario+" criado com sucesso");
+    public static String SuccesFullCreatedUser (String usuario) {
+        return "Usuario " + usuario + " criado com sucesso";
     }
 }
