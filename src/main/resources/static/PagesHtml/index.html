@@ -30,7 +30,7 @@
 <script>
     $(document).ready(function () {
         $.ajax({
-            url: '/publicacoes/all',
+            url: '/publi/all',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -38,11 +38,11 @@
 
                 data.forEach(function (post) {
                     var postItem = $("<div>");
-                    postItem.append("<strong>Nome do Pet:</strong> " + post.nomePet + "<br>");
-                    postItem.append("<strong>Comentário:</strong> " + post.comentario + "<br>");
+                    postItem.append("<strong>Nome do Pet:</strong> " + post.petName + "<br>");
+                    postItem.append("<strong>Comentário:</strong> " + post.comment + "<br>");
 
                     // Exibir a imagem usando rota
-                    var imagePath = '/publicacoes/images/' + post.imageName;
+                    var imagePath = '/publi/images/' + post.imageName;
                     postItem.append('<img src="' + imagePath + '" alt="Imagem do Pet"><br>');
 
                     postList.append(postItem);

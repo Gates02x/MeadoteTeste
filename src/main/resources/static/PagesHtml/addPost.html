@@ -37,14 +37,14 @@
 
         // requisição AJAX para enviar os dados do formulário
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/publicacoes/CriarPost", true);
+        xhr.open("POST", "/publi/CreatePost", true);
         xhr.onload = function() {
             if (xhr.status === 200) {
                 // Lide com a resposta do servidor (opcional)
                 console.log("Post adicionado com sucesso");
 
                 // Redirecione o usuário para a página de consulta
-                window.location.href = "/publicacoes/all"; // Redireciona para a página de petPosts
+                window.location.href = "/publi/all"; // Redireciona para a página de petPosts
             } else {
                 console.error("Erro ao adicionar petPost");
             }

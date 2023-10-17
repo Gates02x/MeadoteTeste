@@ -18,6 +18,7 @@ public class PetPostMapper {
         petPostDTO.setIdPost(petPost.getIdPost());
         petPostDTO.setPetName(petPost.getNomePet());
         petPostDTO.setComment(petPost.getComentario());
+        petPostDTO.setImageName(petPost.getImageName());
 
         petPostDTO.setUsuario(usuarioMapper.toDTO(petPost.getUsuario()));
 

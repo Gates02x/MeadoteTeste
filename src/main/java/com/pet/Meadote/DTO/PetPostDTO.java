@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class PetPostDTO {
 
     private Long idPost;
+    private String imageName;
     private String petName;
     private String comment;
     private UsuarioDTO usuario;

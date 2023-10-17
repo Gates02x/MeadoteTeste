@@ -1,7 +1,6 @@
 package com.pet.Meadote.Service;
 
 import com.pet.Meadote.DTO.PetPostDTO;
-import com.pet.Meadote.DTO.UsuarioDTO;
 import com.pet.Meadote.Mapper.PetPostMapper;
 import com.pet.Meadote.Models.PetPost;
 import com.pet.Meadote.Models.Usuario;
@@ -44,11 +43,12 @@ public class PetPostService {
         post.setComentario(comment);
         post.setUsuario(usuario);
 
+
+        String imageName = System.currentTimeMillis() + "MeAdoteImg" + imageFile.getOriginalFilename();
+        post.setImageName(imageName);
+
         PetPost savedPost = postRepository.save(post);
 
-        String imageName = savedPost.getIdPost() + "_" + imageFile.getOriginalFilename();
-        savedPost.setImageName(imageName);
-        postRepository.save(savedPost);
 
         fileStorageConfig.saveImage(imageName, imageFile);
 
