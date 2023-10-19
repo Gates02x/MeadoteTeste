@@ -1,5 +1,6 @@
 package com.pet.Meadote.Exceptions;
 
+import com.pet.Meadote.Service.PetPostService;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;

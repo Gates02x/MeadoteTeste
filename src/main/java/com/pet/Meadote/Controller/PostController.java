@@ -5,6 +5,7 @@ import com.pet.Meadote.Mapper.PetPostMapper;
 import com.pet.Meadote.Repository.PostRepository;
 import com.pet.Meadote.Service.PetPostService;
 import com.pet.Meadote.StorageCongif.FileStorageConfig;
+import com.pet.Meadote.Utils.SuccessFulMessages;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
@@ -63,7 +64,8 @@ public class PostController {
     }
 
     @DeleteMapping(value = "delete/{postId}",produces = "application/json")
-    public void deleteById(@PathVariable("postId") Long postId ) {
+    public ResponseEntity<String> deleteById(@PathVariable("postId") Long postId ) {
         petPostService.deletePetPost(postId);
+        return ResponseEntity.ok(SuccessFulMessages.SuccesFullDeletedUser(postId));
     }
 }
