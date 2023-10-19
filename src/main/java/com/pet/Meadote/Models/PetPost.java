@@ -3,31 +3,36 @@ package com.pet.Meadote.Models;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Entity
-@Getter
 
-@Table(name = "PostUsuario")
+@Table(name = "POSTUSUARIO")
 public class PetPost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPost;
 
+    @NotNull
+    @NotBlank
+    @Column(name = "IMAGENAME")
     private String imageName;
 
-    @Column(name = "comentarioInfo", length = 500)
+    @NotNull
+    @NotBlank
+    @Column(name = "COMENTARIOINFO", length = 500)
     private String comentario;
 
-    @Column(name = "nomePet", length = 15)
+    @NotNull
+    @NotBlank
+    @Column(name = "NOMEPET", length = 15)
     private String nomePet;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @JoinColumn(name = "IDUSUARIO")
+    private UsuarioLogin usuarioLogin;
 
 }

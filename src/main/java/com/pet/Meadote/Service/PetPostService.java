@@ -1,9 +1,10 @@
 package com.pet.Meadote.Service;
 
 import com.pet.Meadote.DTO.PetPostDTO;
+import com.pet.Meadote.Exceptions.MessageNotFoundException;
 import com.pet.Meadote.Mapper.PetPostMapper;
 import com.pet.Meadote.Models.PetPost;
-import com.pet.Meadote.Models.Usuario;
+import com.pet.Meadote.Models.UsuarioLogin;
 import com.pet.Meadote.Repository.PostRepository;
 import com.pet.Meadote.Repository.UsuarioRepository;
 import com.pet.Meadote.StorageCongif.FileStorageConfig;
@@ -31,17 +32,17 @@ public class PetPostService {
 
 
     public ResponseEntity<?> createPost(String petName, String comment, MultipartFile imageFile, Long userId) {
-        Optional<Usuario> userOptional = usuarioRepository.findById(userId);
+        Optional<UsuarioLogin> userOptional = usuarioRepository.findById(userId);
         if (!userOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário não encontrado.");
         }
 
-        Usuario usuario = userOptional.get();
+        UsuarioLogin usuarioLogin = userOptional.get();
 
         PetPost post = new PetPost();
         post.setNomePet(petName);
         post.setComentario(comment);
-        post.setUsuario(usuario);
+        post.setUsuarioLogin(usuarioLogin);
 
 
         String imageName = System.currentTimeMillis() + "MeAdoteImg" + imageFile.getOriginalFilename();
@@ -58,12 +59,19 @@ public class PetPostService {
     }
 
     public ResponseEntity<List<PetPostDTO>> getPostsByUserId(Long userId) {
-        List<PetPost> userPosts = postRepository.findByUsuarioIdUsuario(userId);
+        List<PetPost> userPosts = postRepository.findByUsuarioLoginIdUsuario(userId);
 
         List<PetPostDTO> userPostDTOs = userPosts.stream()
                 .map(petPostMapper::toDTOPost)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(userPostDTOs);
+    }
+
+    public void deletePetPost(Long postId) {
+        postRepository.findById(postId)
+                .orElseThrow(()-> new MessageNotFoundException(MessageNotFoundException.NotFoundPostId(postId)));
+        postRepository.deleteById(postId);
+
     }
 }

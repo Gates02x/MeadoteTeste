@@ -20,7 +20,7 @@ public class PetPostMapper {
         petPostDTO.setComment(petPost.getComentario());
         petPostDTO.setImageName(petPost.getImageName());
 
-        petPostDTO.setUsuario(usuarioMapper.toDTO(petPost.getUsuario()));
+        petPostDTO.setUsuario(usuarioMapper.toDTO(petPost.getUsuarioLogin()));
 
         return petPostDTO;
     }

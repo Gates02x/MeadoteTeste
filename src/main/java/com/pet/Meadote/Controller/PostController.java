@@ -61,4 +61,9 @@ public class PostController {
     public ResponseEntity<List<PetPostDTO>> getPostsByUserId(@PathVariable Long userId) {
         return petPostService.getPostsByUserId(userId);
     }
+
+    @DeleteMapping(value = "delete/{postId}",produces = "application/json")
+    public void deleteById(@PathVariable("postId") Long postId ) {
+        petPostService.deletePetPost(postId);
+    }
 }
