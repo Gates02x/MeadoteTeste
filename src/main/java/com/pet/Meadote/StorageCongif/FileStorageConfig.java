@@ -13,13 +13,13 @@ import java.nio.file.Paths;
 @Configuration
 public class FileStorageConfig {
 
-    private final String uploadDir = "D:/TCC/Meadote/ImgPost/";
-
     public void saveImage(String imageName, MultipartFile imageFile) {
         try {
+            String uploadDir = System.getProperty("user.dir") + File.separator + "imagens";
+
             File directory = new File(uploadDir);
             if (!directory.exists()) {
-                directory.mkdirs(); //
+                directory.mkdirs();
             }
 
             File file = new File(directory, imageName);
@@ -30,6 +30,7 @@ public class FileStorageConfig {
     }
 
     public UrlResource loadImageAsResource(String imageName) throws MalformedURLException {
+        String uploadDir = System.getProperty("user.dir") + File.separator + "imagens";
         Path imagePath = Paths.get(uploadDir).resolve(imageName).normalize();
         UrlResource resource = new UrlResource(imagePath.toUri());
         return resource;

@@ -23,7 +23,7 @@ public class UsuarioService {
 
     public UsuarioDTO findByIdDto(Long id) {
         return usuarioRepository.findById(id)
-                .map(usuarioMapper::toDTO)
+                .map(usuarioMapper::toDTOUser)
                 .orElseThrow(() -> new MessageNotFoundException(MessageNotFoundException.NotFoundUserId(id)));
     }
 

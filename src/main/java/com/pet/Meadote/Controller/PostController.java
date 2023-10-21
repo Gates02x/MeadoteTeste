@@ -34,16 +34,19 @@ public class PostController {
     public ResponseEntity<?> createPost(
             @RequestParam("petName") String petName,
             @RequestParam("comment") String comment,
+            @RequestParam("idadePet") Long idadePet,
+            @RequestParam("tamanhoPet") String tamanhoPet,
+            @RequestParam("cidadePet") String cidadePet,
             @RequestParam("image") MultipartFile imageFile,
             @RequestParam("userId") Long userId,
             RedirectAttributes redirectAttributes) {
 
-        return petPostService.createPost(petName, comment, imageFile, userId);
+        return petPostService.createPost(petName, comment,idadePet,tamanhoPet,cidadePet,imageFile, userId);
     }
 
     @GetMapping(value = "/images/{imageName}", produces = "application/json")
     public ResponseEntity<UrlResource> getImage(@PathVariable String imageName) throws MalformedURLException {
-        UrlResource imageResource = fileStorageConfig.loadImageAsResource(imageName);
+        UrlResource imageResource = (UrlResource) fileStorageConfig.loadImageAsResource(imageName);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)

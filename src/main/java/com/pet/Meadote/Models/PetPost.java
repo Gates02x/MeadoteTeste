@@ -31,6 +31,20 @@ public class PetPost {
     @Column(name = "NOMEPET", length = 15)
     private String nomePet;
 
+    @NotNull
+    @Column(name = "IDADEPET", length = 15)
+    private Long idadePet;
+
+    @NotNull
+    @NotBlank
+    @Column(name = "TAMANHOPET", length = 15)
+    private String tamanhoPet;
+
+    @NotNull
+    @NotBlank
+    @Column(name = "CIDADEPET", length = 15)
+    private String cidadePet;
+
     @ManyToOne
     @JoinColumn(name = "IDUSUARIO")
     private UsuarioLogin usuarioLogin;

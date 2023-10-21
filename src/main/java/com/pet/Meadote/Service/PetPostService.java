@@ -31,7 +31,7 @@ public class PetPostService {
     private final PetPostMapper petPostMapper;
 
 
-    public ResponseEntity<?> createPost(String petName, String comment, MultipartFile imageFile, Long userId) {
+    public ResponseEntity<?> createPost(String petName, String comment, Long idadePet, String tamanhoPet, String cidadePet, MultipartFile imageFile, Long userId) {
         Optional<UsuarioLogin> userOptional = usuarioRepository.findById(userId);
         if (!userOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário não encontrado.");
@@ -39,17 +39,12 @@ public class PetPostService {
 
         UsuarioLogin usuarioLogin = userOptional.get();
 
-        PetPost post = new PetPost();
-        post.setNomePet(petName);
-        post.setComentario(comment);
-        post.setUsuarioLogin(usuarioLogin);
-
+        PetPost post = petPostMapper.toEntity(petName, comment, idadePet, tamanhoPet, cidadePet, usuarioLogin);
 
         String imageName = System.currentTimeMillis() + "MeAdoteImg" + imageFile.getOriginalFilename();
         post.setImageName(imageName);
 
         PetPost savedPost = postRepository.save(post);
-
 
         fileStorageConfig.saveImage(imageName, imageFile);
 
@@ -58,6 +53,8 @@ public class PetPostService {
         return ResponseEntity.ok(petPostDTO);
     }
 
+
+    // Outros métodos do serviço
     public ResponseEntity<List<PetPostDTO>> getPostsByUserId(Long userId) {
         List<PetPost> userPosts = postRepository.findByUsuarioLoginIdUsuario(userId);
 

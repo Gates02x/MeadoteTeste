@@ -40,6 +40,9 @@
                     var postItem = $("<div>");
                     postItem.append("<strong>Nome do Pet:</strong> " + post.petName + "<br>");
                     postItem.append("<strong>Comentário:</strong> " + post.comment + "<br>");
+                    postItem.append("<strong>Idade do Pet:</strong> " + post.idadePet + "<br>");
+                    postItem.append("<strong>Tamanho do Pet:</strong> " + post.tamanhoPet + "<br>");
+                    postItem.append("<strong>Cidade do Pet:</strong> " + post.cidadePet + "<br>");
 
                     // Exibir a imagem usando rota
                     var imagePath = '/publi/images/' + post.imageName;
