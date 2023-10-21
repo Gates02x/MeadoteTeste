@@ -54,7 +54,7 @@ public class PetPostService {
     }
 
 
-    // Outros métodos do serviço
+
     public ResponseEntity<List<PetPostDTO>> getPostsByUserId(Long userId) {
         List<PetPost> userPosts = postRepository.findByUsuarioLoginIdUsuario(userId);
 
